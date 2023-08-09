@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:SWMClient.ViewModels"
+             xmlns:controls="clr-namespace:SWMClient.Infrastructure.Controls"
+             x:Class="SWMClient.Views.Registration" BackgroundColor="White">
+    <ContentPage.BindingContext>
+        <vm:RegistrationViewModel/>
+    </ContentPage.BindingContext>
+
+    <Grid RowDefinitions="1*,1*,1*">
+
+        <Label 
+                Margin="20"
+                FontSize="Large"
+                TextColor="Black"
+                Text="Регистрация"
+                VerticalOptions="End" 
+                HorizontalOptions="Center" />
+
+        <VerticalStackLayout Grid.Row="1">
+
+            <controls:AvtorizeEntry IsPassword="False" EntryText="{Binding Fullname }" ImageEntry="fio.png"/>
+            <controls:AvtorizeEntry IsPassword="False" EntryText="{Binding Login }" ImageEntry="profel.png"/>
+            <controls:AvtorizeEntry IsPassword="True"  EntryText="{Binding Password }" ImageEntry="pasword.png"/>
+
+            <Button 
+                BackgroundColor="#6d60f8"
+                FontSize="Medium" 
+                Margin="30" 
+                WidthRequest="250" 
+                Command="{Binding RegistrationCommand }" 
+                Text="Зарегистрироваться" />
+
+        </VerticalStackLayout>
+
+        <HorizontalStackLayout VerticalOptions="Center" Margin="10" Grid.Row="2">
+            <Label
+                Margin="0"
+                FontSize="14"
+                TextColor="Black"
+                Text="У вас уже есть аккаунт?  "/>
+
+            <Label Margin="0" FontSize="14" TextDecorations="Underline" TextColor="#6d60f8" Text="Так войдите в него">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding LogInCommand}"/>
+                </Label.GestureRecognizers>
+            </Label>
+
+        </HorizontalStackLayout>
+    </Grid>
+    
+</ContentPage>

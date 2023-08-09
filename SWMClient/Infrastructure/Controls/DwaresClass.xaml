@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<controls:Expander  xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:SWMClient.Infrastructure.Controls"
+             x:Class="SWMClient.Infrastructure.Controls.DwaresClass"
+             VerticalOptions="Center" HorizontalOptions="Center">
+    
+</controls:Expander>
+
+

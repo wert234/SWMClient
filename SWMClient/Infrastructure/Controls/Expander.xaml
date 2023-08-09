@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converter="clr-namespace:SWMClient.Models.BindingConverters"
+             x:Class="SWMClient.Infrastructure.Controls.Expander" ZIndex="444">
+
+    <AbsoluteLayout>
+        <Border Stroke="gray" StrokeThickness="1" Margin="5, 0, 5, 0">
+            <Button x:Name="Button" WidthRequest="200" TextColor="#6d60f8" Clicked="Button_Clicked" />
+        </Border>
+
+
+        <ScrollView ZIndex="444" AbsoluteLayout.LayoutBounds="35, 45" HeightRequest="255" BackgroundColor="#6d60f8" x:Name="Scroll" Loaded="Content_Loaded">
+            <StackLayout x:Name="Content" >
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <Border  Margin="3" WidthRequest="150">
+                            <Button TextColor="#6d60f8" Text="{Binding name}" Clicked="Button_Clicked_1" ClassId="{Binding id, Converter={converter:IndexConvert}}" />
+                        </Border>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
+        </ScrollView>
+    </AbsoluteLayout>
+</ContentView>

@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:Menu="clr-namespace:SWMClient.Infrastructure.Controls"
+             xmlns:vm="clr-namespace:SWMClient.ViewModels"
+             xmlns:views="clr-namespace:SWMClient.Views"
+             x:Class="SWMClient.Views.MainPage"
+             Background="white"
+             x:Name="MainPageControl">
+    <ContentPage.BindingContext>
+        <vm:MainPageViewModel/>
+    </ContentPage.BindingContext>
+
+    <Grid ColumnDefinitions="{Binding Columns}" RowDefinitions="{Binding Rows}">
+        
+        <!--Меню-->
+        <Grid ZIndex="2" Grid.RowSpan="2">
+
+            <Grid 
+                IsVisible="{OnIdiom Phone=true}"
+                VerticalOptions="Start"
+                HeightRequest="50"
+                Background="#6d60f8">
+
+                <Button
+                    FontSize="Medium"
+                    HorizontalOptions="Start"
+                    Text="Мой профель"
+                    BackgroundColor="Transparent"/>
+                <Button 
+                    Command="{Binding OpenMenuCommand}"
+                    HorizontalOptions="End"
+                    ImageSource="menu.png"
+                    BackgroundColor="Transparent"/>
+
+            </Grid>
+
+            <Grid 
+            TranslationX="{Binding MenuPositionX}"
+            RowDefinitions="1*, 150, 80, 400, 1*"
+            HorizontalOptions="Start"
+            WidthRequest="300"
+            Background="#6d60f8">
+
+                <VerticalStackLayout Grid.Row="1" VerticalOptions="Start">
+                    <Image Margin="25" WidthRequest="100" Source="prfel2.png" />
+                    <Label HorizontalOptions="Center" FontSize="Medium" Grid.Row="1" TextColor="White" Text="{Binding FullNmae}"></Label>
+                </VerticalStackLayout>
+
+                <!--<HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Margin="0, 25, 0, 0" Grid.Row="2">
+                    <VerticalStackLayout>
+                        <Label HorizontalOptions="Center" Margin="0" TextColor="White" FontSize="Medium" Text="{Binding SnowWhiteCount}"/>
+                        <Label Margin="0" FontSize="12" TextColor="White" Text="белоснежки"/>
+                    </VerticalStackLayout>
+
+                    <Line Stroke="White" StrokeThickness="2" Background="White" HeightRequest="30" WidthRequest="2" Margin="15"/>
+
+                    <VerticalStackLayout>
+                        <Label Margin="0" TextColor="White" HorizontalOptions="Center" FontSize="Medium" Text="{Binding DworvesCount}"/>
+                        <Label Margin="0" TextColor="White" FontSize="12" Text="гномы"/>
+                    </VerticalStackLayout>
+
+                    <Line Stroke="White" StrokeThickness="2" Background="White" HeightRequest="30" WidthRequest="2" Margin="15"/>
+
+                    <VerticalStackLayout>
+                        <Label Margin="0" TextColor="White" HorizontalOptions="CenterAndExpand" FontSize="Medium" Text="17"/>
+                        <Label Margin="0" TextColor="White" FontSize="12" Text="переводы "/>
+                    </VerticalStackLayout>
+
+                </HorizontalStackLayout>-->
+
+                <StackLayout Grid.Row="3" HorizontalOptions="Center">
+                    <Menu:MenuItem ItemImageStart="profel.png" ItemText="Мой профель" ItemImageEnd="strelka.png" Command="{Binding GoToCommand}" CommandParametr="Profile"/>
+                    <Menu:MenuItem ItemImageStart="dworf.png" ItemText="Мои гномы" ItemImageEnd="strelka.png" Command="{Binding GoToCommand}" CommandParametr="Dwarves" />
+                    <Menu:MenuItem ItemImageStart="snoywhite.png" ItemText="Белоснежки" ItemImageEnd="strelka.png" Command="{Binding GoToCommand}" CommandParametr="SnowWhites"/>
+                    <Menu:MenuItem ItemImageStart="perevod.png" ItemText="Гномьи переводы" ItemImageEnd="strelka.png" Command="{Binding GoToCommand}" CommandParametr="Translations"/>
+                    <Menu:MenuItem ItemImageStart="logut.png" ItemText="Выход" ItemImageEnd="strelka.png" Command="{Binding LogoutCommand}"/>
+                </StackLayout>
+
+                <Grid.Shadow>
+                    <Shadow/>
+                </Grid.Shadow>
+            </Grid>
+
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding CloseMenuCommand }"/>
+            </Grid.GestureRecognizers>
+
+        </Grid>
+
+        <!--Основной контент-->
+        <ContentView Grid.Column="1" Grid.Row="1" Margin="50, 50, 50, 0"  Content="{Binding View}"/>
+    </Grid>
+
+</ContentPage>

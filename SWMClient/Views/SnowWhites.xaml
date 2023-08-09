@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:SWMClient.Infrastructure.Controls"
+             xmlns:models="clr-namespace:SWMClient.Models.BindingConverters"
+             xmlns:vm="clr-namespace:SWMClient.ViewModels"
+             x:Class="SWMClient.Views.SnowWhites">
+    <ContentView.BindingContext>
+        <vm:SnowWhitesViewModel/>
+    </ContentView.BindingContext>
+
+    <Grid>
+
+        <Grid RowDefinitions="75, 1*, 85" Opacity="{Binding OpacityContent}">
+            <VerticalStackLayout  HorizontalOptions="Center" ZIndex="1">
+                <Label HeightRequest="11" FontSize="10" Text="Поиск по иммени :" HorizontalOptions="Start" TextColor="Gray"/>
+                <Border BackgroundColor="Transparent" Stroke="gray" StrokeThickness="1" Margin="5, 0, 5, 0">
+                    <Entry BackgroundColor="Transparent" TextColor="#6d60f8" Text="{Binding SearchName}"/>
+                </Border>
+            </VerticalStackLayout>
+
+            <controls:DataGrid x:Name="DataGrid" Grid.Row="1" ColumnSpacing="250" Items="{Binding Data, Mode=TwoWay}">
+                <controls:DataGrid.TitleItem>
+                    <HorizontalStackLayout Background="#6d60f8">
+                        <Grid WidthRequest="250">
+                            <Label TextColor="White" Text="ФИО"/>
+                            <Image HorizontalOptions="End" WidthRequest="15" Source="up2.png" Rotation="{Binding SortButtonRotationName}"/>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SortNameCommand }"/>
+                            </Grid.GestureRecognizers>
+                        </Grid>
+                        <Grid WidthRequest="250">
+                            <Label TextColor="White" Text="Гномы"/>
+                        </Grid>
+                    </HorizontalStackLayout>
+                </controls:DataGrid.TitleItem>
+            </controls:DataGrid>
+        </Grid>
+
+        <AbsoluteLayout Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center" IsVisible="{Binding IsVisibleDialog}">
+            <Grid  RowDefinitions="50, 50, 1*"  AbsoluteLayout.LayoutFlags="PositionProportional" BackgroundColor="#f3f3f3" WidthRequest="400" HeightRequest="200">
+                <Label Grid.Row="1" VerticalOptions="Start"  HorizontalOptions="Center" x:Name="TextControl" Text="Вы точно хотите запросить этого гнома?"/>
+
+                <Grid Grid.Row="2">
+                    <HorizontalStackLayout HorizontalOptions="Center"  VerticalOptions="Center">
+                        <Button Text="Отмена" Command="{Binding RefuseCommand}"  BackgroundColor="#e93535" WidthRequest="100" Margin="5"/>
+                        <Button Text="Ок" Command="{Binding OkCommand}"   BackgroundColor="#6d60f8" WidthRequest="100" Margin="5" />
+                    </HorizontalStackLayout>
+                </Grid>
+                <Grid.Shadow>
+                    <Shadow/>
+                </Grid.Shadow>
+            </Grid>
+        </AbsoluteLayout>
+    </Grid>
+</ContentView>

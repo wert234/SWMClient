@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:SWMClient.Infrastructure.Controls"
+             xmlns:vm="clr-namespace:SWMClient.ViewModels"
+             x:Class="SWMClient.Views.Translations">
+    <ContentView.BindingContext>
+        <vm:TranslationsViewModel/>
+    </ContentView.BindingContext>
+
+    <Grid RowDefinitions="1*, 85">
+        <controls:DataGrid x:Name="DataGrid" ColumnSpacing="250" Items="{Binding Data, Mode=TwoWay}">
+            <controls:DataGrid.TitleItem>
+                <HorizontalStackLayout Background="#6d60f8">
+                    <Grid WidthRequest="250">
+                        <Label TextColor="White" Text="ФИО белоснежки"/>
+                    </Grid>
+                    <Grid WidthRequest="250">
+                        <Label TextColor="White" Text="Имя гнома"/>
+                    </Grid>
+                </HorizontalStackLayout>
+            </controls:DataGrid.TitleItem>
+        </controls:DataGrid>
+
+        <HorizontalStackLayout HeightRequest="60" HorizontalOptions="Center" Grid.Row="2">
+            <Button CommandParameter="{Binding SelectedItemIndex, Source={x:Reference DataGrid}}" Command="{Binding RefuseCommand}" Margin="5" FontSize="18" WidthRequest="250" Text="Отказать" BackgroundColor="#e93535"/>
+            <Button  CommandParameter="{Binding SelectedItemIndex, Source={x:Reference DataGrid}}" Command="{Binding AcceptCommand}" Margin="5" FontSize="18" WidthRequest="250" Text="Принять" BackgroundColor="#6d60f8"/>
+        </HorizontalStackLayout>
+    </Grid>
+</ContentView>
